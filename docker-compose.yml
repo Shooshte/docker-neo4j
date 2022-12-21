@@ -1,0 +1,14 @@
+services:
+  app-config-db:
+    image: neo4j:latest
+    container_name: app-config-db
+    ports:
+      - "7474:7474"
+      - "7473:7473"
+      - "7687:7687"
+    volumes:
+      - ./scripts:/var/lib/neo4j/scripts
+    environment:
+      - NEO4J_AUTH=neo4j/test123!
+    command:
+      - cypher-shell -u neo4j -p test123! --file /var/lib/neo4j/scripts/constraints.cypher
